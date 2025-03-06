@@ -1,0 +1,90 @@
+/* Основные стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    font-size: 16px;
+  }
+  
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f5f5;
+    color: #333;
+  }
+  
+  header {
+    background: #4CAF50;
+    padding: 10px 0;
+    text-align: center;
+    color: #fff;
+    border-bottom: 2px solid #ddd;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  /* Стиль каталога */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    padding: 10px;
+  }
+  
+  .grid-container div {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px;
+    transition: 0.2s ease-in-out;
+  }
+  
+  .grid-container div:hover {
+    transform: scale(1.1);
+  }
+  
+  button {
+    margin-top: 10px;
+    padding: 8px;
+    border: none;
+    background: #4CAF50;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+  }
+  
+  button:hover {
+    background: #45a049;
+  }
+  
+  /* Корзина */
+  .cart-container {
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    min-height: 100px;
+  }
+  
+  /* Секция Cookie и LocalStorage */
+  .form-container {
+    margin: 10px 0;
+  }
+  
+  input {
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  section {
+    margin: 20px 0;
+  }
+  

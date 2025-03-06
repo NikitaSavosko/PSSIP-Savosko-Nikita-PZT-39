@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Взаимодействие с формами и валидация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+        form {
+            margin-bottom: 30px;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Взаимодействие с формами и валидация</h1>
+
+    <!-- ЗАДАНИЕ 1 -->
+    <h2>Форма с различными элементами управления</h2>
+    <form id="userForm">
+        <label>
+            Имя:
+            <input type="text" id="nameInput" name="name">
+        </label>
+        <br><br>
+
+        <label>
+            Возраст:
+            <input type="number" id="ageInput" name="age">
+        </label>
+        <br><br>
+
+        <label>
+            Подписка:
+            <input type="checkbox" id="subscribeCheckbox" name="subscribe">
+        </label>
+        <br><br>
+
+        Пол:
+        <label><input type="radio" name="gender" value="male"> Мужской</label>
+        <label><input type="radio" name="gender" value="female"> Женский</label>
+        <br><br>
+
+        <label>
+            Любимый цвет:
+            <select id="colorSelect" name="color">
+                <option value="red">Красный</option>
+                <option value="blue">Синий</option>
+                <option value="green">Зелёный</option>
+            </select>
+        </label>
+        <br><br>
+
+        <button type="button" id="submitButton">Отправить</button>
+    </form>
+
+    <h3>Результат данных формы</h3>
+    <div id="formDataOutput"></div>
+
+    <!-- ЗАДАНИЕ 2 -->
+    <h2>Валидация формы</h2>
+    <form id="validationForm">
+        <label>
+            Email (валидация HTML5):
+            <input type="email" id="emailInput" required>
+        </label>
+        <br><br>
+
+        <label>
+            Пароль (валидация через JS):
+            <input type="password" id="passwordInput">
+        </label>
+        <span id="passwordError" class="error"></span>
+        <br><br>
+
+        <label>
+            Логин (валидация через RegExp):
+            <input type="text" id="usernameInput">
+        </label>
+        <span id="usernameError" class="error"></span>
+        <br><br>
+
+        <button type="button" id="validateButton">Проверить</button>
+    </form>
+
+    <!-- ЗАДАНИЕ 3 -->
+    <h2>Примеры регулярных выражений</h2>
+    <p id="regexpOutput"></p>
+
+    <script>
+        // ЗАДАНИЕ 1: Получение данных из полей пользовательских форм
+        document.getElementById('submitButton').addEventListener('click', () => {
+            const name = document.getElementById('nameInput').value;
+            const age = document.getElementById('ageInput').value;
+            const subscribe = document.getElementById('subscribeCheckbox').checked;
+            const gender = document.querySelector('input[name="gender"]:checked')?.value;
+            const color = document.getElementById('colorSelect').value;
+
+            const output = `Имя: ${name}, Возраст: ${age}, Подписка: ${subscribe}, Пол: ${gender}, Любимый цвет: ${color}`;
+            document.getElementById('formDataOutput').textContent = output;
+        });
+
+        // ЗАДАНИЕ 2: Валидация пользовательских форм
+        document.getElementById('validateButton').addEventListener('click', () => {
+            // HTML5 валидация Email
+            const emailInput = document.getElementById('emailInput');
+            if (!emailInput.checkValidity()) {
+                alert('Некорректный Email!');
+                return;
+            }
+
+            // JS валидация пароля
+            const passwordInput = document.getElementById('passwordInput');
+            const passwordError = document.getElementById('passwordError');
+            if (passwordInput.value.length < 6) {
+                passwordError.textContent = 'Пароль должен быть не менее 6 символов';
+                return;
+            } else {
+                passwordError.textContent = '';
+            }
+
+            // RegExp валидация логина
+            const usernameInput = document.getElementById('usernameInput');
+            const usernameError = document.getElementById('usernameError');
+            const usernamePattern = /^[a-zA-Z0-9_]{3,}$/;
+            if (!usernamePattern.test(usernameInput.value)) {
+                usernameError.textContent = 'Логин должен быть не менее 3 символов и содержать только буквы, цифры или нижние подчёркивания';
+                return;
+            } else {
+                usernameError.textContent = '';
+            }
+
+            alert('Валидация прошла успешно!');
+        });
+
+        // ЗАДАНИЕ 3: Работа с объектом RegExp и регулярные выражения
+        const sampleText = 'Съешь ещё этих мягких французских булок, да выпей же чаю. 12345';
+        const pattern = /\s(\w{4})\s/g;
+
+        const matches = sampleText.match(pattern) || [];
+        const testResult = pattern.test(sampleText);
+        const execResult = pattern.exec(sampleText);
+
+        const output = `
+            Совпадения: ${matches.length > 0 ? matches.join(', ') : 'Нет совпадений'}<br>
+            Результат test: ${testResult}<br>
+            Результат exec: ${execResult ? execResult[0] + ' на позиции ' + execResult.index : 'Нет совпадений'}
+        `;
+
+        document.getElementById('regexpOutput').innerHTML = output;
+    </script>
+</body>
+</html>

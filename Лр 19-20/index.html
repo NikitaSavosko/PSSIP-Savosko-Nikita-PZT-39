@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Интернет-магазин и хранилище данных</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Интернет-магазин и сохранение данных</h1>
+  </header>
+  
+  <main>
+    <!-- Секция каталога товаров -->
+    <section id="shop">
+      <h2>Каталог товаров</h2>
+      <div id="catalog" class="grid-container"></div>
+    </section>
+    
+    <!-- Секция корзины -->
+    <section id="cart">
+      <h2>Корзина</h2>
+      <div id="cart-container" class="cart-container"></div>
+    </section>
+
+    <hr />
+
+    <!-- Секция COOKIE данных -->
+    <section id="cookies-section">
+      <h2>Форма и Cookie</h2>
+      <div class="form-container">
+        <input id="name" placeholder="ФИО">
+        <input id="email" placeholder="Email">
+        <input id="dob" placeholder="Дата рождения">
+        <input id="birthplace" placeholder="Место рождения">
+        <input id="hobby" placeholder="Увлечения">
+        <div>
+          <button onclick="saveCookie()">Сохранить в Cookie</button>
+          <button onclick="loadCookie()">Загрузить из Cookie</button>
+          <button onclick="clearCookie()">Очистить Cookie</button>
+        </div>
+      </div>      
+    </section>
+
+    <hr />
+
+    <!-- Секция LocalStorage данных -->
+    <section id="localstorage-section">
+      <h2>Сохранение данных с LocalStorage</h2>
+      <div class="form-container">
+        <input id="local-name" placeholder="ФИО">
+        <input id="local-email" placeholder="Email">
+        <div>
+          <button onclick="saveLocalStorage()">Сохранить в LocalStorage</button>
+          <button onclick="loadLocalStorage()">Загрузить из LocalStorage</button>
+          <button onclick="clearLocalStorage()">Очистить LocalStorage</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

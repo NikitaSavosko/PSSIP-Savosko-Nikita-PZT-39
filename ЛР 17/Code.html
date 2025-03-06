@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Demo Site</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 200vh;
+        }
+        .drag-item {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            text-align: center;
+            line-height: 100px;
+            margin: 20px;
+            cursor: grab;
+        }
+        .drop-zone {
+            width: 120px;
+            height: 120px;
+            border: 2px dashed lightgray;
+            display: inline-block;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Event Demo</h1>
+
+    <section>
+        <h2>События мыши</h2>
+        <button id="mouseButton">Кнопка</button>
+        <p id="mouseMessage">Наведи мышь на текст</p>
+    </section>
+
+    <section>
+        <h2>События клавиатуры</h2>
+        <input type="text" id="keyboardInput" placeholder="Type here...">
+        <p id="keyboardMessage">Напиши что-нибудь на клавиатуре</p>
+    </section>
+
+    <section>
+        <h2>Drag & Drop события</h2>
+        <div class="drag-item" draggable="true" id="dragItem">Потяни куб</div>
+        <div class="drop-zone" id="dropZone">Положи его сюда</div>
+    </section>
+
+    <section>
+        <h2>События указателя</h2>
+        <div id="pointerBox" style="width: 100px; height: 100px; background-color: pink;">
+            Нажми
+        </div>
+    </section>
+
+    <section>
+        <h2>События полосы прокрутки</h2>
+        <p id="scrollMessage">Прокрути полосу прокрутки</p>
+    </section>
+
+    <section>
+        <h2>События сенсорных экранов</h2>
+        <div id="touchBox" style="width: 100px; height: 100px; background-color: lightgreen;">
+            Нажми
+        </div>
+    </section>
+
+    <section>
+        <h2>События связанные с таймером</h2>
+        <button id="startTimer">Запустить таймер</button>
+        <p id="timerMessage">Таймер остановлен</p>
+    </section>
+
+    <script>
+        // События мыши
+        const mouseButton = document.getElementById('mouseButton');
+        const mouseMessage = document.getElementById('mouseMessage');
+
+        mouseButton.addEventListener('click', () => {
+            alert('Кнопка мыши нажата');
+        });
+
+        mouseMessage.addEventListener('mouseover', () => {
+            mouseMessage.textContent = 'Мышь наведена на текст';
+        });
+
+        mouseMessage.addEventListener('mouseout', () => {
+            mouseMessage.textContent = 'Мышь ушла с текста';
+        });
+
+        // События клавиатуры
+        const keyboardInput = document.getElementById('keyboardInput');
+        const keyboardMessage = document.getElementById('keyboardMessage');
+
+        keyboardInput.addEventListener('input', (e) => {
+            keyboardMessage.textContent = `Вы ввели: ${e.target.value}`;
+        });
+
+        // Drag & Drop события
+        const dragItem = document.getElementById('dragItem');
+        const dropZone = document.getElementById('dropZone');
+
+        dragItem.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text', 'dragItem');
+        });
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.textContent = 'Получилось';
+        });
+
+        // События указателя
+        const pointerBox = document.getElementById('pointerBox');
+
+        pointerBox.addEventListener('pointerdown', () => {
+            pointerBox.style.backgroundColor = 'orange';
+        });
+
+        pointerBox.addEventListener('pointerup', () => {
+            pointerBox.style.backgroundColor = 'pink';
+        });
+
+        // События полосы прокрутки
+        const scrollMessage = document.getElementById('scrollMessage');
+
+        window.addEventListener('scroll', () => {
+            scrollMessage.textContent = 'Прокрутка проходит успешно';
+        });
+
+        // События сенсорных экранов
+        const touchBox = document.getElementById('touchBox');
+
+        touchBox.addEventListener('touchstart', () => {
+            touchBox.textContent = 'Нажато';
+        });
+
+        touchBox.addEventListener('touchend', () => {
+            touchBox.textContent = 'Нажми';
+        });
+
+        // События связанные с таймером
+        const startTimer = document.getElementById('startTimer');
+        const timerMessage = document.getElementById('timerMessage');
+
+        let timer;
+
+        startTimer.addEventListener('click', () => {
+            if (timer) {
+                clearInterval(timer);
+                timer = null;
+                timerMessage.textContent = 'Таймер остановлен';
+            } else {
+                let count = 0;
+                timer = setInterval(() => {
+                    count++;
+                    timerMessage.textContent = `Таймер: ${count} Секунд`;
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
